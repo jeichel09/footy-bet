@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../../contexts/authContext";
+import { usePocket } from "../../contexts/PocketContext";
 
 export default function Navbar() {
     const {
-        isAuthenticated,
-        username,
-    } = useContext(AuthContext);
+        token,
+        user,
+    } = usePocket();
 
     return (
         <nav className="flex items-center justify-between flex-wrap mx-1 p-0">
@@ -19,23 +18,19 @@ export default function Navbar() {
                 </button>
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                {isAuthenticated && (
-                     <>
-                        <h4 className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">Welcome, {username}.</h4>
-                        <div className="text-sm lg:flex-grow">
-                            <Link to="/wallet" className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">
-                                Wallet
-                            </Link>
-                            <Link to="/profile" className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">
-                                Profile
-                            </Link>
-                            <Link to="/logout" className="inline-block text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</Link>
-                        </div>
-                     </>
-                     
+                {user && (
+                    <div className="text-sm lg:flex-grow">
+                        <Link to="/wallet" className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">
+                            Wallet
+                        </Link>
+                        <Link to="/profile" className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">
+                            Profile
+                        </Link>
+                        <Link to="/logout" className="inline-block text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</Link>
+                    </div>
                 )}
                 
-                {!isAuthenticated && (
+                {!user && (
                     <div>
                         <Link to="/login" className="inline-block text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Login</Link>
                         <Link to="/signup" className="inline-block text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Sign Up</Link>

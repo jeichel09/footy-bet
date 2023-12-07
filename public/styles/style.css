@@ -52,3 +52,14 @@ nav {
     border-radius: 8px;
     box-shadow: gray 0px 0px 10px;
 }
+
+section.login {
+    background-color: #3D4C5E;
+    color: #ECEFEA;
+    height: 900px;
+    opacity: 0.95;
+    border-radius: 2px;
+}
+
+
+
