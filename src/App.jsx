@@ -1,14 +1,13 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/authContext';
-
 
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import Logout from "./pages/logout/Logout";
-import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   return (
@@ -16,7 +15,7 @@ function App() {
       <AuthProvider>
         <>
           <Navbar />
-          
+              
           <Routes>
             <Route path={'/'} element={<Home />} />
             <Route path={'/login'} element={<Login />} />
@@ -25,9 +24,7 @@ function App() {
           </Routes>
         </>
       </AuthProvider>
-    </ErrorBoundary>
-    
-      
+    </ErrorBoundary>  
   )
 }
 

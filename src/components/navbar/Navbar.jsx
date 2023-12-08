@@ -22,23 +22,23 @@ export default function Navbar() {
                 {isAuthenticated && (
                      <>
                         <h4 className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">Welcome, {username}.</h4>
-                        <div className="text-sm lg:flex-grow">
-                            <Link to="/wallet" className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">
+                        <div className="text-sm flex lg:flex-grow">
+                            <Link to="/wallet" className="block lg:mt-0 hover:text-teal-500 ml-12 pt-2  mr-4">
                                 Wallet
                             </Link>
-                            <Link to="/profile" className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">
+                            <Link to="/profile" className="block lg:mt-0 hover:text-teal-500 ml-8 pt-2  mr-4">
                                 Profile
                             </Link>
-                            <Link to="/logout" className="inline-block text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</Link>
+                            <Link to="/logout" className="inline-block ml-auto text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</Link>
                         </div>
                      </>
                      
                 )}
                 
                 {!isAuthenticated && (
-                    <div>
+                    <div className="flex ml-auto">
                         <Link to="/login" className="inline-block text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Login</Link>
-                        <Link to="/signup" className="inline-block text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Sign Up</Link>
+                        <Link to="/signup" className="inline-block  text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Sign Up</Link>
                     </div>
                 )}
             </div>
