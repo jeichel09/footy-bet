@@ -1,21 +1,17 @@
 import { errorMessage } from "../../lib/pocketbase";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
-import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
+import FormInput from "../signup/FormInput";
 
-let LoginFormKeys = {
-  Username: "username",
-  Password: "password",
-};
 
 export default function Login() {
   const { loginSubmitHandler } = useContext(AuthContext);
-  const {values, onChange, onSubmit } = useForm(loginSubmitHandler, {
-    [LoginFormKeys.Username]: "",
-    [LoginFormKeys.Password]: "",
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
   });
 
   return (

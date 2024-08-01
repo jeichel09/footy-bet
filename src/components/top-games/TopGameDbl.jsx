@@ -8,12 +8,12 @@ const TopGameDbl = () => {
 
     return (
         <div className="border mx-4 border-solid border-gray-700 rounded p-5 text-center">
-            <h4 >Top Game EPL</h4>
-            <div className="grid grid-cols-5">
+            <h4 className="pb-4">Top Game DBL</h4>
+            <div className="grid grid-cols-4">
                 <img src={getImagePath(dbl.home_team)} alt={`${dbl.home_team} Logo`} className="w-8 h-8 mx-auto"/>
                 <span>{dbl.home_team} - {dbl.away_team}</span>
                 <img src={getImagePath(dbl.away_team)} alt={`${dbl.away_team} Logo`} className="w-8 h-8 mx-auto"/>
-                <span>|  Kickoff: {dbl_kickoff}</span>
+                <span>Kickoff: {dbl_kickoff}</span>
             </div>
         </div>
     );

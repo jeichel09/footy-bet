@@ -1,28 +1,96 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
-import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
 
-let SignUpFormKeys = {
-  Username: "username",
-  Email: "email",
-  FirstName: "first_name",
-  LastName: "last_name",
-  Password: "password",
-  ConfirmPassword: "passwordConfirm",
-};
+import FormInput from "./FormInput";
 
 export default function SignUp() {
   const { signupSubmitHandler } = useContext(AuthContext);
-  const {values, onChange, onSubmit } = useForm(signupSubmitHandler, {
-    [SignUpFormKeys.Username]: "",
-    [SignUpFormKeys.Email]: "",
-    [SignUpFormKeys.FirstName]: "",
-    [SignUpFormKeys.LastName]: "",
-    [SignUpFormKeys.Password]: "",
-    [SignUpFormKeys.ConfirmPassword]: "",
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    password: "",
+    passwordConfirm: "",
   });
+
+  const inputs = [
+    {
+      id: 1,
+      name: "username",
+      type: "text",
+      placeholder: "Username",
+      errorMessage:
+        "Username should be 3-16 characters and shouldn't include any special character!",
+      label: "Username",
+      pattern: "^[A-Za-z0-9]{3,16}$",
+      required: true,
+    },
+    {
+      id: 2,
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      errorMessage: "It should be a valid email address!",
+      label: "Email",
+      required: true,
+    },
+    {
+      id: 3,
+      name: "first_name",
+      type: "text",
+      placeholder: "First Name",
+      errorMessage:
+        "The Name should be 2-16 characters and shouldn't include any special character!",
+      label: "First Name",
+      pattern: "^[A-Za-z0-9]{2,16}$",
+      required: true,
+    },
+    {
+        id: 4,
+        name: "last_name",
+        type: "text",
+        placeholder: "Last Name",
+        errorMessage:
+          "The Name should be 2-16 characters and shouldn't include any special character!",
+        label: "Last Name",
+        pattern: "^[A-Za-z0-9]{2,16}$",
+        required: true,
+      },
+    {
+      id: 5,
+      name: "password",
+      type: "password",
+      placeholder: "Password",
+      errorMessage:
+        "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
+      label: "Password",
+      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      required: true,
+    },
+    {
+      id: 6,
+      name: "passwordConfirm",
+      type: "password",
+      placeholder: "Confirm Password",
+      errorMessage: "Passwords don't match!",
+      label: "Confirm Password",
+      pattern: values.password,
+      required: true,
+    },
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    signupSubmitHandler(values);
+  };
+
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   return (
     <section className="mt-1 mx-1 sign-up">
@@ -37,33 +105,15 @@ export default function SignUp() {
                 <h3 className="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl dark:text-white">Create a new account</h3>
             </div>
             <hr className="border border-gray-400 my-4" />
-            <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
-                <div className="form-group">
-                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-white dark:text-white">Username</label>
-                    <input type="text" name={SignUpFormKeys.Username} id="username" className="form-control bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required="" value={values[SignUpFormKeys.Username]} onChange={onChange}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-white dark:text-white">Email</label>
-                    <input type="email" name={SignUpFormKeys.Email} id="email" className="form-control bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" value={values[SignUpFormKeys.Email]} onChange={onChange}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-white dark:text-white">First Name</label>
-                    <input type="text" name={SignUpFormKeys.FirstName} id="first_name" className="form-control bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required="" value={values[SignUpFormKeys.FirstName]} onChange={onChange}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-white dark:text-white">Last Name</label>
-                    <input type="text" name={SignUpFormKeys.LastName} id="last_name" className="form-control bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required="" value={values[SignUpFormKeys.LastName]} onChange={onChange}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-white dark:text-white">Password</label>
-                    <input type="password" name={SignUpFormKeys.Password} id="password" placeholder="••••••••" className="form-control bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" value={values[SignUpFormKeys.Password]}
-                    onChange={onChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-white dark:text-white">Confirm Password</label>
-                    <input type="password" name={SignUpFormKeys.ConfirmPassword} id="confirm-password" placeholder="••••••••" className="form-control bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" value={values[SignUpFormKeys.ConfirmPassword]}
-                    onChange={onChange} />
-                </div>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                {inputs.map((input) => (
+                    <FormInput
+                        key={input.id}
+                        {...input}
+                        value={values[input.name]}
+                        onChange={onChange}
+                    />
+                ))}
                 
                 <button type="submit" className="w-full text-white bg-teal-500 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign up</button>
                 <p className="text-sm font-light text-white dark:text-gray-400">

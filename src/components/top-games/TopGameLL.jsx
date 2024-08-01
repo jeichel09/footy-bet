@@ -8,12 +8,12 @@ const TopGameLL = () => {
 
     return (
         <div className="border mx-4 border-solid border-gray-700 rounded p-5 text-center">
-            <h4 >Top Game ll</h4>
-            <div className="grid grid-cols-5">
+            <h4 className="pb-4">Top Game La Liga</h4>
+            <div className="grid grid-cols-4">
                 <img src={getImagePath(ll.home_team)} alt={`${ll.home_team} Logo`} className="w-8 h-8 mx-auto"/>
                 <span>{ll.home_team} - {ll.away_team}</span>
                 <img src={getImagePath(ll.away_team)} alt={`${ll.away_team} Logo`} className="w-8 h-8 mx-auto"/>
-                <span>|  Kickoff: {ll_kickoff}</span>
+                <span>Kickoff: {ll_kickoff}</span>
             </div>
         </div>
     );

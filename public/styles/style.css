@@ -20,21 +20,33 @@ nav {
 }
 
 .container {
-    min-width: 1863px;
+    min-width: 1900px;
 }
 
 .sidebar {
     background-color: #3D4C5E;
     color: #ECEFEA;
-    height: 900px;
+    height: 1200px;
     opacity: 0.85;
+    border-radius: 2px;
+}
+
+.league-select {
+    background-color: none;
+    border: 1px solid #3D4C5E;
+    border-radius: 2px;
+}
+
+.league-select:visited {
+    background-color: teal;
+    border: 1px solid #3D4C5E;
     border-radius: 2px;
 }
 
 .main-content {
     background-color: #3D4C5E;
     color: #ECEFEA;
-    height: 900px;
+    height: 1200px;
     opacity: 0.85;
     border-radius: 2px;
 }
@@ -42,7 +54,7 @@ nav {
 .betslip {
     background-color: #3D4C5E;
     color: #ECEFEA;
-    height: 900px;
+    height: 1200px;
     opacity: 0.85;
     border-radius: 2px;
 }
@@ -61,5 +73,12 @@ section.login {
     border-radius: 2px;
 }
 
+.profile-content {
+    background-color: #3D4C5E;
+    color: #ECEFEA;
+    height: 900px;
+    opacity: 0.95;
+    border-radius: 2px;
+}
 
 
