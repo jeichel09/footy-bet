@@ -1,6 +1,6 @@
 import Sidebar from '../../components/sidebar/Sidebar';
 //import GameOddsDisplay from '../../components/odds-of-game/GameOddsDisplay';
-import OddsOfGame from '../../components/odds-of-game/OddsOfGame2';
+import OddsOfGame from '../../components/odds-of-game/OddsOfGame';
 import Betslip from '../../components/betslip/Betslip';
 
 const Event = ({ league, gameId }) => (

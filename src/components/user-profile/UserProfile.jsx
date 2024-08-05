@@ -12,44 +12,11 @@ const UserProfile = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [error, setError] = useState(null);
     const [avatar, setAvatar] = useState(null);
 
-    /*useEffect(() => {
-        const fetchProfile = async () => {
-            try {
-                const userProfile = await getUserProfile(username);
-                setProfile(userProfile);
-                setEditedProfile(userProfile);
-            } catch (error) {
-                console.error('Error fetching user profile:', error);
-            }
-        };
-        fetchProfile();
-    }, [username]);*/
-
-    /*const fetchProfile = useCallback(async () => {
-        if (!isAuthenticated) {
-            setError('User is not authenticated!');
-            return;
-        }
-        
-        try {
-            const userProfile = await getUserProfile(username);
-            setProfile(userProfile);
-            setEditedProfile(userProfile);
-        } catch (error) {
-            console.error('Error fetching user profile:', error);
-            setError('Failed to load profile. Please try again later.');
-        }
-    }, [username, isAuthenticated]);
-
-    useEffect(() => {
-        fetchProfile();
-    }, [fetchProfile]);*/
-
-    
     const fetchProfile = useCallback(async () => {
         if (!isAuthenticated) {
             setError('User is not authenticated!');
@@ -65,6 +32,7 @@ const UserProfile = () => {
             setFirstName(userProfile.first_name);
             setLastName(userProfile.last_name);
             setAddress(userProfile.address);
+            setPhone(userProfile.phone);
             setAvatar(userProfile.avatar);
         } catch (error) {
             console.error('Error fetching user profile:', error);
@@ -90,19 +58,20 @@ const UserProfile = () => {
         setFirstName(profile.first_name);
         setLastName(profile.last_name);
         setAddress(profile.address);
+        setPhone(profile.phone);
         setAvatar(null);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Submitting changes. Current states:', { email, firstName, lastName, address, avatar });
+        console.log('Submitting changes. Current states:', { email, firstName, lastName, address, phone, avatar });
         try {
             const formData = new FormData();
             formData.append('first_name', firstName);
             formData.append('last_name', lastName);
             formData.append('address', address);
+            formData.append('phone', phone);
             
-            // Only update email if it has changed
             if (email !== profile.email) {
                 formData.append('email', email);
             }
@@ -151,14 +120,6 @@ const UserProfile = () => {
             }
         }
     };
-
-    /*useEffect(() => {
-        console.log('Component re-rendered. isEditing:', isEditing);
-    });
-
-    if (error) {
-        return <div className="error-message">{error}</div>;
-    }*/
 
     if (!profile) {
         return <div>Loading...</div>;
@@ -253,6 +214,23 @@ const UserProfile = () => {
                             />
                         </div>
                         <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+                                Phone
+                            </label>
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="phone"
+                                type="text"
+                                name="phone"
+                                value={phone || ''}
+                                onChange={(e) => {
+                                    console.log('Phone changed:', e.target.value);
+                                    setPhone(e.target.value);
+                                }}
+                                disabled={!isEditing}
+                            />
+                        </div>
+                        <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="avatar">
                                 Avatar
                             </label>
@@ -301,7 +279,7 @@ const UserProfile = () => {
                             </div>
                         </div>
                         <button
-                                className="bg-red-500 hover:bg-red-700 mt-20 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                className="bg-red-500 hover:bg-red-700 mt-40 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="button"
                                 onClick={handleDeleteAccount}
                             >

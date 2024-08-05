@@ -50,52 +50,6 @@ export const AuthProvider = ({ children }) => {
         isAuthenticated: !!isAuth.record?.username,
     }), [isAuth, loginSubmitHandler, signupSubmitHandler, logoutHandler]);
 
-      /*function isEmpty(isAuth) {
-        for(var prop in isAuth) {
-            if(isAuth.hasOwnProperty(prop))
-                return false;
-        }
-    
-        return true;
-      }
-
-      let values = {};
-
-      if (isEmpty(isAuth)) {
-        values = {
-          loginSubmitHandler,
-          signupSubmitHandler,
-          logoutHandler,
-          username: isAuth.username,
-          email: isAuth.email,
-          first_name: isAuth.first_name,
-          last_name: isAuth.last_name,
-          isAuthenticated: !!isAuth.username,
-        };
-      } else {
-        values = {
-          loginSubmitHandler,
-          signupSubmitHandler,
-          logoutHandler,
-          username: isAuth.record.username,
-          email: isAuth.record.email,
-          first_name: isAuth.record.first_name,
-          last_name: isAuth.record.last_name,
-          isAuthenticated: !!isAuth.record.username,
-        };
-      }*/
-      
-      /*const values = {
-        loginSubmitHandler,
-        signupSubmitHandler,
-        logoutHandler,
-        username: isAuth.username,
-        email: isAuth.email,
-        first_name: isAuth.first_name,
-        last_name: isAuth.last_name,
-        isAuthenticated: !!isAuth.username,
-      };*/
-
       return (
             <AuthContext.Provider value={contextValue}>
               {children}

@@ -1,15 +1,15 @@
 import Sidebar from "../../components/sidebar/Sidebar";
-import WalletPage from "../../components/wallet/WalletPage";
+import DepositPage from "../../components/deposit-page/DepositPage";
 import Betslip from "../../components/betslip/Betslip";
 
-const Wallet = () => {
+const Deposit = () => {
   return (
     <div className="container flex mt-1">
         <Sidebar />
-        <WalletPage />
+        <DepositPage />
         <Betslip />
     </div>
   )
 }
 
-export default Wallet
+export default Deposit

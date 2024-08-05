@@ -73,10 +73,10 @@ section.login {
     border-radius: 2px;
 }
 
-.profile-content {
+.profile-content, .wallet {
     background-color: #3D4C5E;
     color: #ECEFEA;
-    height: 900px;
+    height: 1200px;
     opacity: 0.95;
     border-radius: 2px;
 }

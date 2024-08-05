@@ -23,6 +23,7 @@ export async function getUserProfile(username) {
             first_name: user.first_name,
             last_name: user.last_name,
             address: user.address || '',
+            phone: user.phone || '',
             avatar: user.avatar || '',
         };
     } catch (error) {
@@ -50,6 +51,7 @@ export async function updateUserProfile(username, formData) {
             first_name: updatedUser.first_name,
             last_name: updatedUser.last_name,
             address: updatedUser.address || '',
+            phone: updatedUser.phone || '',
             avatar: updatedUser.avatar || '',
         };
     } catch (error) {

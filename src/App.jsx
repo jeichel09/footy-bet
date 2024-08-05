@@ -7,6 +7,9 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import Logout from "./pages/logout/Logout";
+import Wallet from "./pages/wallet/Wallet";
+import Deposit from "./pages/deposit/Deposit";
+import Withdrawal from './pages/withdrawal/Withdrawal';
 import Profile from "./pages/profile/Profile";
 import Epl from './pages/leagues/epl';
 import LaLiga from './pages/leagues/laliga';
@@ -28,6 +31,9 @@ function App() {
             <Route path={'/login'} element={<Login />} />
             <Route path={'/signup'} element={<SignUp />} />
             <Route path={'/logout'} element={<Logout />} />
+            <Route path={'/wallet'} element={<Wallet />} />
+            <Route path={'/wallet/deposit'} element={<Deposit />} />
+            <Route path={'/wallet/withdrawal'} element={<Withdrawal />} />
             <Route path={'/profile'} element={<Profile />} />
             <Route path={'/leagues/epl'} element={<Epl />} />
             <Route path={'/leagues/laliga'} element={<LaLiga />} />
