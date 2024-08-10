@@ -1,12 +1,15 @@
-import { Routes, Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/authContext';
+import AuthContext from './contexts/authContext';
 
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import Logout from "./pages/logout/Logout";
+import Resolve from './pages/resolve/Resolve';
 import Wallet from "./pages/wallet/Wallet";
 import Deposit from "./pages/deposit/Deposit";
 import Withdrawal from './pages/withdrawal/Withdrawal';
@@ -18,6 +21,13 @@ import SerieA from './pages/leagues/seriea';
 import Ligue1 from './pages/leagues/ligue1';
 import Event from './pages/event/Event';
 import ErrorBoundary from "./components/ErrorBoundary";
+
+const ProtectedAdminRoute = ({ children }) => {
+  const { isAuthenticated, isAdmin } = useContext(AuthContext);
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (!isAdmin) return <Navigate to="/" replace />;
+  return children;
+};
 
 function App() {
   return (
@@ -31,6 +41,11 @@ function App() {
             <Route path={'/login'} element={<Login />} />
             <Route path={'/signup'} element={<SignUp />} />
             <Route path={'/logout'} element={<Logout />} />
+            <Route path={'/resolve-bets'} element={
+              <ProtectedAdminRoute>
+                <Resolve />
+              </ProtectedAdminRoute>
+            } />
             <Route path={'/wallet'} element={<Wallet />} />
             <Route path={'/wallet/deposit'} element={<Deposit />} />
             <Route path={'/wallet/withdrawal'} element={<Withdrawal />} />

@@ -6,7 +6,6 @@ const pb = new PocketBase(url);
 pb.autoCancellation(false);
 
 export async function getUserProfile(username) {
-    console.log('Fetching profile for username:', username);
     try {
         if (!pb.authStore.isValid) {
             console.error('User is not authenticated');
@@ -68,6 +67,40 @@ export async function updateUserProfile(username, formData) {
         throw error;
     }
 }
+
+export async function checkForOpenBets(id) {
+    const openBets = await pb.collection('bets').getList(1, 1, {
+        filter: `userID = "${id}" && status = "open"`,
+    });
+
+    return openBets.totalItems > 0;
+}
+
+export async function checkForBalance(id) {
+    const transactions = await pb.collection('transactions').getList(1, 50, {
+        filter: `userID = "${id}"`,
+    });
+
+    const balance = transactions.items.reduce((acc, transaction) => {
+        return transaction.ta_type === 'deposit' || transaction.ta_type === 'gain' ? acc + transaction.amount : acc - transaction.amount;
+    }, 0);
+
+    return balance > 0;
+}
+
+export const getBettingHistory = async (userId) => {
+    try {
+        const resultList = await pb.collection('bets').getList(1, 50, {
+            filter: `userID = "${userId}"`,
+            sort: '-created',
+            expand: 'userID'
+        });
+        return resultList.items;
+    } catch (error) {
+        console.error('Error fetching betting history:', error);
+        throw error;
+    }
+};
 
 export async function deleteUserAccount(id) {
     try {

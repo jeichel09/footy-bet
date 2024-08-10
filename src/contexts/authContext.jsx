@@ -9,14 +9,21 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const navigateTo = useNavigate();
     const [isAuth, setIsAuth] = usePersistedState('isAuth', {});
+    const [authError, setAuthError] = useState(null);
     
     const loginSubmitHandler = useCallback(async (values) => {
         try {
           const res = await auth.login(values.username, values.password);
           setIsAuth(res);
-          navigateTo('/');
+          setAuthError(null);
+          if (res.record.role === 'admin') {
+            navigateTo('/resolve-bets');
+          } else {
+            navigateTo('/');
+          }
         } catch (error) {
           console.error(auth.errorMessage(error));
+          setAuthError("Invalid username or password. Please try again.");
         }
     }, [navigateTo, setIsAuth]);
     
@@ -38,17 +45,24 @@ export const AuthProvider = ({ children }) => {
         navigateTo('/', { replace: true });
       }, [navigateTo, setIsAuth]);
 
+      const clearAuthError = useCallback(() => {
+        setAuthError(null);
+      }, []);
+
       const contextValue = useMemo(() => ({
         loginSubmitHandler,
         signupSubmitHandler,
         logoutHandler,
+        clearAuthError,
+        authError,
         id: isAuth.record?.id,
         username: isAuth.record?.username,
         email: isAuth.record?.email,
         first_name: isAuth.record?.first_name,
         last_name: isAuth.record?.last_name,
         isAuthenticated: !!isAuth.record?.username,
-    }), [isAuth, loginSubmitHandler, signupSubmitHandler, logoutHandler]);
+        isAdmin: isAuth.record?.role == 'admin',
+    }), [isAuth, loginSubmitHandler, signupSubmitHandler, logoutHandler, clearAuthError, authError]);
 
       return (
             <AuthContext.Provider value={contextValue}>

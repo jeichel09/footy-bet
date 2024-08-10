@@ -7,7 +7,11 @@ export default function Navbar() {
     const {
         isAuthenticated,
         username,
+        isAdmin,
     } = useContext(AuthContext);
+
+    //console.log('Navbar: isAuthenticated =', isAuthenticated, 'isAdmin =', isAdmin);
+    
     const [avatarUrl, setAvatarUrl] = useState(null);
 
     useEffect(() => {
@@ -15,10 +19,8 @@ export default function Navbar() {
             if (isAuthenticated && username) {
                 try {
                     const userProfile = await getUserProfile(username);
-                    console.log('Fetched user profile:', userProfile);
                     if (userProfile.avatar) {
                         const url = `https://footy-bet.pockethost.io/api/files/_pb_users_auth_/${userProfile.id}/${userProfile.avatar}`;
-                        console.log('Avatar URL:', url);
                         setAvatarUrl(url);
                     } else {
                         console.log('No avatar found for user');
@@ -47,7 +49,7 @@ export default function Navbar() {
                 </button>
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                {isAuthenticated && (
+                {isAuthenticated && !isAdmin && (
                     <>
                         <div className="flex items-center">
                             <img
@@ -71,6 +73,18 @@ export default function Navbar() {
                             <Link to="/logout" className="inline-block ml-auto text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</Link>
                         </div>
                     </>
+                )}
+
+                {isAuthenticated && isAdmin && (
+                    <>
+                    <div className="flex items-center">
+                        <h4 className="block mt-4 lg:inline-block lg:mt-0 hover:text-teal-500 mr-4">Welcome, {username}.</h4>
+                    </div>
+                    <div className="text-sm flex lg:flex-grow">
+                        
+                        <Link to="/logout" className="inline-block ml-auto text-sm mr-10 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</Link>
+                    </div>
+                </>
                 )}
                 
                 {!isAuthenticated && (

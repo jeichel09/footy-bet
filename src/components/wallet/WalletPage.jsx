@@ -30,7 +30,7 @@ const WalletPage = () => {
             });
 
             const calculatedBalance = resultList.items.reduce((acc, transaction) => {
-            return transaction.ta_type === 'deposit'
+            return transaction.ta_type === 'deposit' || transaction.ta_type === 'gain'
                 ? acc + transaction.amount
                 : acc - transaction.amount;
             }, 0);

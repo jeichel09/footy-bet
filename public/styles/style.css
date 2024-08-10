@@ -11,6 +11,14 @@ body {
     background-size: cover;
 }
 
+html, body, #root {
+    overflow: hidden;
+}
+
+#root {
+overflow-y: auto;
+}
+
 nav {
     background-color: #3D4C5E;
     color: #ECEFEA;
@@ -20,10 +28,10 @@ nav {
 }
 
 .container {
-    min-width: 1900px;
+    min-width: 1864px;
 }
 
-.sidebar {
+.sidebar, .resolve {
     background-color: #3D4C5E;
     color: #ECEFEA;
     height: 1200px;
@@ -55,13 +63,14 @@ nav {
     background-color: #3D4C5E;
     color: #ECEFEA;
     height: 1200px;
-    opacity: 0.85;
+    opacity: 0.90;
     border-radius: 2px;
 }
 
 .betslip-ui {
     background-color: #ECEFEA;
     border-radius: 8px;
+    color: teal;
     box-shadow: gray 0px 0px 10px;
 }
 
