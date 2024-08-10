@@ -1,6 +1,6 @@
-#H1 Footy Bet Sportsbook Application Documentation
+# Footy Bet Sportsbook Application Documentation
 
-#H2 Table of Contents:
+## Table of Contents:
 
     1.	Project Overview
     2.	Architecture
@@ -13,26 +13,26 @@
     9.	Future Improvements
 
     
-#H2 Project Overview
+## Project Overview
 Footy Bet is a sportsbook application focused on European football leagues. It allows users to view odds, place bets, manage their wallet, and track their betting history. The application provides a user-friendly interface for both regular users and administrators.
 
-#H2 Architecture
+## Architecture
 The application follows a client-server architecture:
 •	Frontend: React-based single-page application (SPA)
 •	Backend: PocketBase (providing both database and API services)
 •	API: The-odds-api for fetching real-time odds data
 
-#H3 Frontend Architecture
+### Frontend Architecture
 •	Utilizes React components for modular UI construction
 •	Uses React Router for navigation
 •	Implements Context API for state management (AuthContext)
 •	Employs custom hooks for form handling and persisted state
 
-#H3 Backend Architecture
+### Backend Architecture
 •	PocketBase serves as both the database and API server
 •	Handles user authentication, data storage, and basic CRUD operations
 
-#H2 Main Components
+## Main Components
 1.	App: The root component that sets up routing and global context
 2.	Navbar: Navigation component displayed across all pages
 3.	Home: Landing page showing top games from each league
@@ -43,7 +43,7 @@ The application follows a client-server architecture:
 8.	Betslip: Shows current bets and allows users to confirm their wagers
 9.	ResolveBets: Admin component for resolving bet outcomes
     
-#H2 Key Features
+## Key Features
 1.	User authentication and authorization
 2.	Real-time odds display for multiple European football leagues
 3.	Bet placement on various outcomes (1X2, Over/Under)
@@ -52,25 +52,25 @@ The application follows a client-server architecture:
 6.	Betting history tracking
 7.	Admin interface for resolving bets
 
-#H2 Technologies Used
+## Technologies Used
 •	React
 •	React Router
 •	Tailwind CSS
 •	PocketBase
 •	The-odds-api
 
-#H2 Database Schema
+## Database Schema
 Key collections in PocketBase:
 1.	users: Stores user information
 2.	transactions: Records all financial transactions (deposits, withdrawals, bets)
 3.	bets: Stores all placed bets and their outcomes
 
-#H2 Authentication and Authorization
+## Authentication and Authorization
 •	Utilizes PocketBase's built-in authentication system
 •	Implements role-based access control (regular users vs admins)
 •	Uses AuthContext to manage authentication state across the application
 
-#H2 API Integration
+## API Integration
 •	Integrates with the-odds-api to fetch real-time odds data
 •	Uses PocketBase's API for all database operations and user management
 
